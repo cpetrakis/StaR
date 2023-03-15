@@ -1,0 +1,380 @@
+<!--
+=========================================================
+Material Dashboard - v2.1.2
+=========================================================
+
+Product Page: https://www.creative-tim.com/product/material-dashboard
+Copyright 2020 Creative Tim (https://www.creative-tim.com)
+Coded by Creative Tim
+
+=========================================================
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+        <link rel="icon" type="image/png" href="assets/img/favicon.png">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>StaR</title>
+        <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+        <!--     Fonts and icons     -->
+         <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+   
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+        <!-- CSS Files -->
+        <link href="assets/css/material-dashboard.min.css" rel="stylesheet" />
+        <!--   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.1/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin=""/>
+        -->
+        <link rel="stylesheet" href="assets/leaflet/leaflet.css"/>
+        <link href="assets/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+    </head>
+    <body class="">
+        <div class="wrapper ">
+            <div class="sidebar" data-color="purple" data-background-color="white" data-image="assets/img/sidebar.jpg">     
+                <div class="logo" style="padding:10px 0px 10px 60px;"><a href="#" class="simple-text logo-normal">
+                        <img style="width:28px; height: 28px; margin: 10px 10px 15px 8px;" src="assets/img/favicon.png" alt=""/>STAR
+                    </a></div>
+                <div class="sidebar-wrapper">
+                    <ul class="nav">
+                        <li class="nav-item active  ">
+                            <a class="nav-link" href="./index.html">
+                                <i class="material-icons">dashboard</i>
+                                <p>Trip Information</p>
+                            </a>
+                        </li>  
+                        <li class="nav-item ">
+                            <a class="nav-link" href="README.pdf" target='_blank'>
+                                <i class="material-icons">article</i>
+                                <p>Read me</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="main-panel">
+                <!-- Navbar -->
+                <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+                    <div class="container-fluid">
+                        <div class="navbar-wrapper">
+                            <a class="navbar-brand" href="javascript:;"><b>S</b>mart <b>T</b>rip pl<b>A</b>nne<b>R</b></a>
+                        </div>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"  aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="navbar-toggler-icon icon-bar"></span>
+                            <span class="navbar-toggler-icon icon-bar"></span>
+                            <span class="navbar-toggler-icon icon-bar"></span>
+                        </button>
+                        <div class="collapse navbar-collapse justify-content-end">
+                            <form class="navbar-form">
+                                <div class="input-group"></div>
+                            </form>
+                            <ul class="navbar-nav">
+                                <li class="nav-item dropdown"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <!-- End Navbar -->
+                <div class="content">
+
+                    <div class="row">  
+                        <div class=" col-md-12">                  
+                            <div class="card">
+                                <div class="card-header card-header-primary">
+                                    <h4 class="card-title">Departure Information</h4>
+                                    <p class="card-category">Select a departure location, date and time below</p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+
+                                        <div class="col-md-12">
+                                            <div class="form-group invalid">
+                                                <p>Departure Location:</p>
+                                                <label style='padding: 40px 0px 0px 0px;' class="bmd-label-floating">Type at least 3 characters in the input</label>
+                                                <form id="departures_form" name="departures_form" >
+                                                    <input style="width:100%;" id="departure_point" name="search" class="searchInput form-control" maxlength="60" required/>
+                                                </form>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <p>Date and Time: </p>
+                                                <input id="datetime" type="text" class="form-control datetimepicker"/>
+                                            </div>
+                                        </div> 
+                                        
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <p>Minutes Range: </p>
+                                                <input id="minutesRange" type="number" class="form-control" value="10"/>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-12">
+                                            <button id="search" type="submit" class="btn btn-primary pull-left">Search</button>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header card-header-primary">
+                                    <h4 class="card-title ">Departures From : <span id="destination_name"></span></h4>
+                                    <p class="card-category"> Here are all departures from selected location</p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table id="departuresTable" class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Planned Departure</th>
+                                                    <th>Delay</th>
+                                                    <th>Actual Departure</th>
+                                                    <th>Destination</th>
+                                                    <th>Direction</th>
+                                                    <th>Line</th>
+                                                    <th>Operator</th>
+                                                    <th style="width:50px;">View Details</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody ></tbody>
+                                            <tfoot></tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">  
+                        <div class=" col-md-12">
+                            <div class="card">
+                                <div class="card-header card-header-warning">
+                                    <h4 class="card-title">See Locations On Map</h4>
+                                    <p class="card-category">The blue marker is your desired departure location and grey markers are destinations</p>
+                                </div>
+                                <div class="card-body table-responsive">
+                                    <div style="height: 600px;" id="map"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <nav class="float-left">
+                            <ul></ul>
+                        </nav>
+                        <div class="copyright float-right">
+                            version: 1.0.0 |
+                            &copy;
+                            <script>
+                                document.write(new Date().getFullYear());
+                            </script>, made with <i class="material-icons">favorite</i> by
+                            <a href="http://www.petrakis.info" target="_blank">#KP</a>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <div id="loadingModal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div style="background-color: #f4f5f6;" class="modal-content text-center">
+                    <div class="modal-body  ">
+                        <img alt="" style="width:300px; height:250px;" src="assets/img/loader.gif"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="noDataModal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div style="background-color: #f4f5f6;" class="modal-content text-center">
+                    <div class="modal-body  ">
+                        Could not find any departures from This location :(
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="errorModal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content text-center" >
+                    <div class="modal-header">
+                        <h5 class="modal-title">Something went wrong!! </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body  ">
+                        Try again later :(
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="tripDetails" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="tripDetailsTitle">.</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="modalMap"></div>
+                        <div id="arrival_details"></div>
+                        <div class="row">  
+                            <div class=" col-md-12">
+                                <div class="card">
+                                    <div class="card-header card-header-primary" id="headingDeparture" style='height:80px;' >
+                                        <h4 class="card-title">Departure Information</h4>
+                                        <p>
+                                            <button style='color:#dcb5e4; padding:0px;' class="btn btn-link" data-toggle="collapse" data-target="#collapseDeparture" aria-expanded="false" aria-controls="collapseDeparture">
+                                                Click to expand/collapse 
+                                            </button>
+                                        </p>
+                                    </div>
+                                    <div id="accordionDeparture">
+                                        <div id="collapseDeparture" class="collapse show" aria-labelledby="headingDeparture" data-parent="#accordionDeparture">
+                                            <div class="card-body table-responsive">
+                                                <table class="table" >
+                                                    <tbody id='departureInfo'>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">  
+                            <div class=" col-md-12">
+                                <div class="card">
+                                    <div class="card-header card-header-primary" id="headingArrival" style='height:80px;' >
+                                        <h4 class="card-title">Arrival Information</h4>
+                                        <p>
+                                            <button style='color:#dcb5e4; padding:0px;' class="btn btn-link" data-toggle="collapse" data-target="#collapseArrival" aria-expanded="false" aria-controls="collapseArrival">
+                                                Click to expand/collapse 
+                                            </button>
+                                        </p>
+                                    </div>
+                                    <div id="accordionArrival">
+                                        <div id="collapseArrival" class="collapse show" aria-labelledby="headingArrival" data-parent="#accordionArrival">
+                                            <div class="card-body table-responsive" style='max-height:310px'>
+                                                <table class="table" >
+                                                    <tbody id='arrivalInfo'>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">  
+                            <div class=" col-md-12">
+                                <div class="card">
+                                    <div class="card-header card-header-primary" id="headingRemarks" style='height:80px;' >
+                                        <h4 class="card-title">Remarks</h4>
+                                        <p>
+                                            <button style='color:#dcb5e4; padding:0px;' class="btn btn-link" data-toggle="collapse" data-target="#collapseRemarks" aria-expanded="false" aria-controls="collapseRemarks">
+                                                Click to expand/collapse 
+                                            </button>
+                                        </p>
+                                    </div>
+                                    <div id="accordionRemarks">
+                                        <div id="collapseRemarks" class="collapse show" aria-labelledby="headingRemarks" data-parent="#accordionRemarks">
+                                            <div class="card-body table-responsive" style='max-height:310px'>
+                                                <table class="table" >
+                                                    <tbody id='remarks'>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">  
+                            <div class=" col-md-12">
+                                <div class="card">
+                                    <div class="card-header card-header-primary" id="headingOne" style='height:80px;' >
+                                        <h4 class="card-title">Stop Overs</h4>
+                                        <p>
+                                            <button style='color:#dcb5e4; padding:0px;' class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                                Click to expand/collapse 
+                                            </button>
+                                        </p>
+                                    </div>
+                                    <div id="accordion">
+                                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                            <div class="card-body table-responsive" style='max-height:310px'>
+                                                <div class='text-center'> 
+                                                <button onclick='showStopOvers()'  type="button"  title="show all stopovers" class="btn btn-primary btn-link btn-sm ">
+                                                    <i class="material-icons">refresh</i>
+                                                </button>
+                                                </div>
+                
+                                                <table class="table" >
+                                                    <tbody id='stopovers'>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--   Core JS Files   -->
+        <script src="assets/js/core/jquery.min.js"></script>
+        <script src="assets/js/core/popper.min.js"></script>
+        <script src="assets/js/core/bootstrap-material-design.min.js"></script>
+        <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+        <!-- Plugin for the momentJs  -->
+        <script src="assets/js/plugins/moment.min.js"></script>
+        <!--  Plugin for Sweet Alert -->
+        <script src="assets/js/plugins/sweetalert2.js"></script>
+        <!-- Forms Validations Plugin -->
+        <script src="assets/js/plugins/jquery.validate.min.js"></script>
+        <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+        <script src="assets/js/plugins/jquery.bootstrap-wizard.js"></script>
+        <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+        <script src="assets/js/plugins/bootstrap-selectpicker.js"></script>
+        <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+        <script src="assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
+        <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
+        <script src="assets/js/plugins/jquery.dataTables.min.js"></script>
+        <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+        <script src="assets/js/plugins/bootstrap-tagsinput.js"></script>
+        <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+        <script src="assets/js/plugins/jasny-bootstrap.min.js"></script>
+        <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+        <script src="assets/js/plugins/fullcalendar.min.js"></script>
+        <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+        <script src="assets/js/plugins/jquery-jvectormap.js"></script>
+        <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+        <script src="assets/js/plugins/nouislider.min.js"></script>
+        <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+        <!-- Library for adding dinamically elements -->
+        <script src="assets/js/plugins/arrive.min.js"></script>
+        <!-- Chartist JS -->
+        <script src="assets/js/plugins/chartist.min.js"></script>
+        <!--  Notifications Plugin    -->
+        <script src="assets/js/plugins/bootstrap-notify.js"></script>
+        <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+        <script src="assets/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
+        <script src="assets/jquery-ui/jquery-ui.min.js"></script>
+        <script src="assets/leaflet/leaflet.js"></script>
+        <script src="scripts.js"></script>
+    </body>
+</html>
