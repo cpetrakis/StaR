@@ -4,7 +4,7 @@
 
 Smart Trip Planner is a standalone web application with a key role to present to the user all journey's details which start from a given departure location (city or station name), date and time and a specific minutes range.
 
-![Alt text](assets/img/readme/1.png?raw=true "Home")
+![Alt text](assets/img/readme/1.png? "Home")
 
 The main screen contains three inputs where user can fill the basic parameters to search.
 In the first input user must type at least 3 characters and the system dynammically generates a dropdown list (querying the given api) with all possible locations that should match to the given input to select from. 
