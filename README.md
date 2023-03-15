@@ -11,28 +11,28 @@ In the first input user must type at least 3 characters and the system dynammica
 The second input provides a datetime picker with a familiar calendar in which the user can pick a desired date and time. 
 The third ipnut accepts only digits which are the minutes range for the departure.
 
-![Alt text](assets/img/readme/2.png?raw=true "Location form")
+![Alt text](public_html/assets/img/readme/2.png?raw=true "Location form")
 
-![Alt text](assets/img/readme/3.png?raw=true "Date picker")
+![Alt text](public_html/assets/img/readme/3.png?raw=true "Date picker")
 
 When all neccesary information is filled and user hits the search button, application generates dynamically a table whith all departures from the given location and starting from the given date/time and range.
 
-![Alt text](assets/img/readme/4.png?raw=true "Departures table")
+![Alt text](public_html/assets/img/readme/4.png?raw=true "Departures table")
 
 A map is also being generated showing the departure location (blue marker) and all the possible destinations (grey markers).
 Clicking on each marker user can access the services provided in every station.
 
-![Alt text](assets/img/readme/5.png?raw=true "Departures map")
+![Alt text](public_html/assets/img/readme/5.png?raw=true "Departures map")
 
 On the departures table there is a button (view details) which generates a modal showing all the available information about the departure, arrival and remarks information. It also provides all the stopovers (all the passed stops are checked) giving the user the ability to manage the stops through the UI.
 
-![Alt text](assets/img/readme/6.png?raw=true "Trip information 1/2")
+![Alt text](public_html/assets/img/readme/6.png?raw=true "Trip information 1/2")
 
-![Alt text](assets/img/readme/7.png?raw=true "Trip information 2/2")
+![Alt text](public_html/assets/img/readme/7.png?raw=true "Trip information 2/2")
 
 Last but not least the application also provides a map whith information about the route of the journey. (blue marker = Origin location, grey marker= destination location, red dot = stopovers, blue dot = current location).
 
-![Alt text](assets/img/readme/8.png?raw=true "Trip route on map")
+![Alt text](public_html/assets/img/readme/8.png?raw=true "Trip route on map")
  
 Finally, the tool is implemented in such a way that it is easily scalable.
 
