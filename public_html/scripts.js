@@ -295,7 +295,7 @@ $(document).ready(function () {
 
 function getTripDetails(tripID, lineName) {
     $.ajax({
-        url: "https://v5.db.transport.rest/trips/" + tripID + "?lineName=" + lineName + "&stopovers=true&remarks=true&polyline=true&language=en",
+        url: "https://v5.db.transport.rest/trips/"+encodeURIComponent(tripID)+"?lineName="+encodeURIComponent(lineName)+"&stopovers=true&remarks=true&polyline=false&language=en",
         type: 'GET',
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
         success: function (response) {
